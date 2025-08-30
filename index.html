@@ -77,7 +77,7 @@
                 if (i >= heartArray.length) {
                     clearInterval(interval);
                 }
-            }, 150);  // Szybsza animacja serca (150ms na linię)
+            }, 130);  // Szybsza animacja serca (150ms na linię)
         };
 
         // Funkcja animująca ludziki trzymające się za rękę w jednej linii
@@ -85,7 +85,7 @@
             addText("\n" + human1);
             setTimeout(() => {
                 animateLyrics();  // Rozpocznij wyświetlanie tekstu piosenki po 2 sekundach
-            }, 2000);  // Opóźnienie 2 sekundy przed rozpoczęciem tekstu piosenki
+            }, 1000);  // Opóźnienie 2 sekundy przed rozpoczęciem tekstu piosenki
         };
 
         // Funkcja animująca tekst piosenki z opóźnieniem 3500 ms
@@ -101,7 +101,7 @@
                             animateHeart(); // Serce pojawi się po zakończeniu tekstu piosenki
                         }, 2000);  // Przerwa przed sercem
                     }
-                }, 3500); // 3500 ms (3.5 sekundy) pomiędzy wersami
+                }, 3000); // 3500 ms (3.5 sekundy) pomiędzy wersami
             }, 1000); // 1000 ms (1 sekunda) opóźnienia przed rozpoczęciem piosenki
         };
 
@@ -110,3 +110,4 @@
     </script>
 </body>
 </html>
+
