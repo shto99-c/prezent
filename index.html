@@ -11,67 +11,25 @@
             background-color: black;
             color: white; /* Zmieniony kolor tekstu na biały */
             font-family: 'Roboto Mono', monospace; /* Zmieniona czcionka na Roboto Mono */
-            font-size: 20px; /* Stała czcionka */
+            font-size: 4vw; /* Czcionka dostosowana do szerokości ekranu (dla telefonów) */
             white-space: pre-wrap;
             word-wrap: break-word;
             overflow: hidden;
             margin: 0;
             padding: 20px;
-            display: flex; /* Flexbox do układu obok siebie */
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
         }
-
-        #content {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 1200px;
-        }
-
         #terminal {
-            flex: 1;
-            background-color: #000;
-            padding: 20px;
-            border-radius: 5px;
-        }
-
-        #text {
-            flex: 1;
-            margin-left: 20px;
-            padding: 20px;
-            background-color: #111;
-            border-radius: 5px;
-            height: 100%;
-            overflow-y: auto;
-            color: white;
-        }
-
-        h2 {
-            margin-top: 0;
+            white-space: pre;
         }
     </style>
 </head>
 <body>
-
-<div id="content">
     <div id="terminal"></div>
-    <div id="text">
-        <h2>W deszczu maleńkich żółtych kwiatów</h2>
-        <p>
-            Trzeci singel zespołu Myslovitz z płyty <i>Happiness Is Easy</i>, wydany 29 stycznia 2007 roku.
-            W chórkach gościnny udział Marii Peszek. Inspiracją dla słów piosenki była powieść Gabriela Márqueza
-            pod tytułem <i>Sto lat samotności</i>.
-        </p>
-    </div>
-</div>
+    <script>
+        const terminal = document.getElementById("terminal");
 
-<script>
-    const terminal = document.getElementById("terminal");
-
-    // ASCII Heart (z literą A)
-    const heartWithA = `   
+        // ASCII Heart (z literą A)
+        const heartWithA = `   
   *****       *****
 **     **   **     **
 **      ** **      **
@@ -82,77 +40,76 @@
          **
 `;
 
-    // ASCII Humans w jednej linii (trzymający się za rękę)
-    const human1 = `
+        // ASCII Humans w jednej linii (trzymający się za rękę)
+        const human1 = `
     O   O
    /|\\ /|\\
    / \\ / \\
 `;
 
-    // Zaktualizowany tekst piosenki
-    const lyrics = [
-        "Pójdziemy ze sobą powoli obok",
-        "Do końca wszystkiego, żeby zacząć na nowo",
-                                            "",
-        "Bez słowa i snu w zachwycie nocą",
-        "A bliskość rozproszy nasz strach przed ciemnością",
-                                            "",
-        "Będziemy tam nago biegali po łąkach",
-        "Okryją nas drzewa, gdy zajdą wszystkie słońca",
-                                            "",
-        "I czując Cię obok, opowiem o wszystkim",
-        "Jak często się boję i czuję się nikim",
-                                    "",
-        "Twoje łzy miażdżą mi serce",
-        "I opadam i wzbijam się i ciągle chcę więcej"
-    ];
+        // Zaktualizowany tekst piosenki
+        const lyrics = [
+            "Pójdziemy ze sobą powoli obok",
+            "Do końca wszystkiego, żeby zacząć na nowo",
+                                                "",
+            "Bez słowa i snu w zachwycie nocą",
+            "A bliskość rozproszy nasz strach przed ciemnością",
+                                                "",
+            "Będziemy tam nago biegali po łąkach",
+            "Okryją nas drzewa, gdy zajdą wszystkie słońca",
+                                                "",
+            "I czując Cię obok, opowiem o wszystkim",
+            "Jak często się boję i czuję się nikim",
+                                                "",
+            "Twoje łzy miażdżą mi serce",
+            "I opadam i wzbijam się i ciągle chcę więcej"
+        ];
 
-    // Funkcja do dodawania tekstu na ekran
-    const addText = (text) => {
-        terminal.textContent += text;
-    };
+        // Funkcja do dodawania tekstu na ekran
+        const addText = (text) => {
+            terminal.textContent += text;
+        };
 
-    // Funkcja animująca serce
-    const animateHeart = () => {
-        let i = 0;
-        const heartArray = heartWithA.split("\n");
-        const interval = setInterval(() => {
-            addText(heartArray[i] + "\n");
-            i++;
-            if (i >= heartArray.length) {
-                clearInterval(interval);
-            }
-        }, 150);  // Szybsza animacja serca (150ms na linię)
-    };
-
-    // Funkcja animująca ludziki trzymające się za rękę w jednej linii
-    const animateHumans = () => {
-        addText("\n" + human1);
-        setTimeout(() => {
-            animateLyrics();  // Rozpocznij wyświetlanie tekstu piosenki po 2 sekundach
-        }, 2000);  // Opóźnienie 2 sekundy przed rozpoczęciem tekstu piosenki
-    };
-
-    // Funkcja animująca tekst piosenki z opóźnieniem 3500 ms
-    const animateLyrics = () => {
-        let i = 0;
-        setTimeout(() => {  // Przerwa przed rozpoczęciem piosenki (1000 ms)
+        // Funkcja animująca serce
+        const animateHeart = () => {
+            let i = 0;
+            const heartArray = heartWithA.split("\n");
             const interval = setInterval(() => {
-                addText("\n" + lyrics[i]);
+                addText(heartArray[i] + "\n");
                 i++;
-                if (i >= lyrics.length) {
+                if (i >= heartArray.length) {
                     clearInterval(interval);
-                    setTimeout(() => {
-                        animateHeart(); // Serce pojawi się po zakończeniu tekstu piosenki
-                    }, 2000);  // Przerwa przed sercem
                 }
-            }, 3500); // 3500 ms (3.5 sekundy) pomiędzy wersami
-        }, 1000); // 1000 ms (1 sekunda) opóźnienia przed rozpoczęciem piosenki
-    };
+            }, 150);  // Szybsza animacja serca (150ms na linię)
+        };
 
-    // Uruchomienie animacji
-    animateHumans();
-</script>
+        // Funkcja animująca ludziki trzymające się za rękę w jednej linii
+        const animateHumans = () => {
+            addText("\n" + human1);
+            setTimeout(() => {
+                animateLyrics();  // Rozpocznij wyświetlanie tekstu piosenki po 2 sekundach
+            }, 2000);  // Opóźnienie 2 sekundy przed rozpoczęciem tekstu piosenki
+        };
 
+        // Funkcja animująca tekst piosenki z opóźnieniem 3500 ms
+        const animateLyrics = () => {
+            let i = 0;
+            setTimeout(() => {  // Przerwa przed rozpoczęciem piosenki (1000 ms)
+                const interval = setInterval(() => {
+                    addText("\n" + lyrics[i]);
+                    i++;
+                    if (i >= lyrics.length) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            animateHeart(); // Serce pojawi się po zakończeniu tekstu piosenki
+                        }, 2000);  // Przerwa przed sercem
+                    }
+                }, 3500); // 3500 ms (3.5 sekundy) pomiędzy wersami
+            }, 1000); // 1000 ms (1 sekunda) opóźnienia przed rozpoczęciem piosenki
+        };
+
+        // Uruchomienie animacji
+        animateHumans();
+    </script>
 </body>
 </html>
