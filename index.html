@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prezent ASCII</title>
+    <style>
+        body {
+            background-color: black;
+            color: white; /* Zmieniony kolor tekstu na biały */
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow: hidden;
+            margin: 0;
+            padding: 20px;
+        }
+        #terminal {
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+    <div id="terminal"></div>
+    <script>
+        const terminal = document.getElementById("terminal");
+
+        // ASCII Heart (z literą A)
+        const heartWithA = `
+  *****       *****
+**     **   **     **
+**      ** **      **
+ **     ***     **
+   **     *     **
+     **   A   **
+       **   **
+         **
+`;
+
+        // ASCII Humans w jednej linii (trzymający się za rękę)
+        const human1 = `
+    O   O
+   /|\\ /|\\
+   / \\ / \\
+`;
+
+        // Zaktualizowany tekst piosenki
+        const lyrics = [
+            "Pójdziemy ze sobą powoli obok",
+            "Do końca wszystkiego, żeby zacząć na nowo",
+                        "",
+            "Bez słowa i snu w zachwycie nocą",
+            "A bliskość rozproszy nasz strach przed ciemnością",
+                        "",
+            "Będziemy tam nago biegali po łąkach",
+            "Okryją nas drzewa, gdy zajdą wszystkie słońca",
+                        "",
+            "I czując Cię obok, opowiem o wszystkim",
+            "Jak często się boję i czuję się nikim",
+                        "",
+            "Twoje łzy miażdżą mi serce",
+            "I opadam i wzbijam się i ciągle chcę więcej"
+        ];
+
+        // Funkcja do dodawania tekstu na ekran
+        const addText = (text) => {
+            terminal.textContent += text;
+        };
+
+        // Funkcja animująca serce
+        const animateHeart = () => {
+            let i = 0;
+            const heartArray = heartWithA.split("\n");
+            const interval = setInterval(() => {
+                addText(heartArray[i] + "\n");
+                i++;
+                if (i >= heartArray.length) {
+                    clearInterval(interval);
+                }
+            }, 150);  // Szybsza animacja serca (150ms na linię)
+        };
+
+        // Funkcja animująca ludziki trzymające się za rękę w jednej linii
+        const animateHumans = () => {
+            addText("\n" + human1);
+            setTimeout(() => {
+                animateLyrics();  // Rozpocznij wyświetlanie tekstu piosenki po 2 sekundach
+            }, 2000);  // Opóźnienie 2 sekundy przed rozpoczęciem tekstu piosenki
+        };
+
+        // Funkcja animująca tekst piosenki z opóźnieniem 3500 ms
+        const animateLyrics = () => {
+            let i = 0;
+            setTimeout(() => {  // Przerwa przed rozpoczęciem piosenki (1000 ms)
+                const interval = setInterval(() => {
+                    addText("\n" + lyrics[i]);
+                    i++;
+                    if (i >= lyrics.length) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            animateHeart(); // Serce pojawi się po zakończeniu tekstu piosenki
+                        }, 2000);  // Przerwa przed sercem
+                    }
+                }, 3500); // 3500 ms (3.5 sekundy) pomiędzy wersami
+            }, 1000); // 1000 ms (1 sekunda) opóźnienia przed rozpoczęciem piosenki
+        };
+
+        // Uruchomienie animacji
+        animateHumans();
+    </script>
+</body>
+</html>
